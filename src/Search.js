@@ -17,7 +17,7 @@ class Search extends React.Component {
     */
     handleChange = (event) => {
         const query = event.target.value;
-        //TODO: remove all console.log from this function
+        //TODO: remove all console.log from this function and create books for each on of them
         const request = API.search(query, 20)
             .then((data) => {
                 if (this.state.lastRequest === request) {
