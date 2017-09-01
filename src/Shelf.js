@@ -13,6 +13,9 @@ class Shelf extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
+
+{/* TODO: Insert Book here */}
+
                         <div className="bookshelf">
                             <h2 className="bookshelf-title">Currently Reading</h2>
                             <div className="bookshelf-books">
