@@ -1,13 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BookShelf from './Books/BookShelf';
+import PropTypes from 'prop-types';
 
 /**
 * @description Represents a Bookshelf. Contains Books
 */
 class Shelf extends React.Component {
+    static propTypes = {
+        reading: PropTypes.array.isRequired,
+        wantToRead: PropTypes.array.isRequired,
+        read: PropTypes.array.isRequired,
+        changeBookStatus: PropTypes.func.isRequired,
+        selectedValue: PropTypes.func.isRequired
+    };
 
     render() {
+        const { reading, wantToRead, read, changeBookStatus,selectedValue } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -15,12 +24,20 @@ class Shelf extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
+                        <div className="bookshelf">
+                            <h2 className="bookshelf-title">Currently Reading</h2>
+                            <BookShelf books={reading} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
+                        </div>
 
-                        <BookShelf title="Currently Reading" />
+                        <div className="bookshelf">
+                            <h2 className="bookshelf-title">Want to Read</h2>
+                            <BookShelf books={wantToRead} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
+                        </div>
 
-                        <BookShelf title="Want to Read" />
-
-                        <BookShelf title="Read" />
+                        <div className="bookshelf">
+                            <h2 className="bookshelf-title">Read</h2>
+                            <BookShelf books={read} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
+                        </div>
 
                     </div>
                 </div>

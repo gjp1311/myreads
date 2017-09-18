@@ -1,14 +1,25 @@
 import React from 'react';
 import * as API from './BooksAPI'
 import { Link } from 'react-router-dom';
+import BookShelf from './Books/BookShelf';
+import PropTypes from 'prop-types';
 
 /**
 * @description Represents the Search Form
 */
 class Search extends React.Component {
 
+    static propTypes = {
+        reading: PropTypes.array.isRequired,
+        wantToRead: PropTypes.array.isRequired,
+        read: PropTypes.array.isRequired,
+        changeBookStatus: PropTypes.func.isRequired,
+        selectedValue: PropTypes.func.isRequired
+    };
+
     state = {
-        lastRequest: {}
+        lastRequest: {},
+        books: []
     };
 
     /**
@@ -17,24 +28,43 @@ class Search extends React.Component {
     */
     handleChange = (event) => {
         const query = event.target.value;
-        //TODO: remove all console.log from this function and create books for each on of them
-        const request = API.search(query, 20)
-            .then((data) => {
-                if (this.state.lastRequest === request) {
-                    console.log(query);
-                    console.log(data);
-                } else {
-                    console.log("Not the last request. So abort");
-                }
-
+        if (query.length > 0) {
+            const request = API.search(query, 20)
+                .then((data) => {
+                    if (this.state.lastRequest === request) {
+                        const books = Array.isArray(data) ? data : [];
+                        books.map(b => {
+                            b.status = this.props.selectedValue(b);
+                        });
+                        this.setState({
+                            books: books
+                        });                        
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.setState({
+                        books: []
+                    });
+                });
+            this.setState({
+                lastRequest: request
             });
-        this.setState({
-            lastRequest: request
-        });
-
+        }
+        else {
+            this.setState({
+                lastRequest: null
+            });
+            this.setState({
+                books: []
+            });
+        }
     }
 
+
     render() {
+        const { changeBookStatus, selectedValue } = this.props;
+        const { books } = this.state;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -44,7 +74,7 @@ class Search extends React.Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <ol className="books-grid"></ol>
+                    <BookShelf books={books} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
                 </div>
             </div>
         );
