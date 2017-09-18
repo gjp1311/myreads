@@ -34,11 +34,12 @@ class Search extends React.Component {
                     if (this.state.lastRequest === request) {
                         const books = Array.isArray(data) ? data : [];
                         books.map(b => {
-                            b.status = this.props.selectedValue(b);
+                            return b.status = this.props.selectedValue(b);
                         });
+                        console.log(books);
                         this.setState({
                             books: books
-                        });                        
+                        });
                     }
                 })
                 .catch((error) => {

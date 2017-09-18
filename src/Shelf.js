@@ -28,25 +28,19 @@ class Shelf extends React.Component {
                             <h2 className="bookshelf-title">Currently Reading</h2>
                             <BookShelf books={reading} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
                         </div>
-
                         <div className="bookshelf">
                             <h2 className="bookshelf-title">Want to Read</h2>
                             <BookShelf books={wantToRead} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
                         </div>
-
                         <div className="bookshelf">
                             <h2 className="bookshelf-title">Read</h2>
                             <BookShelf books={read} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
                         </div>
-
                     </div>
                 </div>
                 <div className="open-search">
                     <Link to='/search' className="open-search">Add a book</Link>
                 </div>
-
-
-
             </div>
         );
     }
