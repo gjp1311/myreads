@@ -9,15 +9,15 @@ class Book extends React.Component {
 
     static propTypes = {
         book: PropTypes.object.isRequired,
-        changeBookStatus: PropTypes.func.isRequired    
+        changeBookStatus: PropTypes.func.isRequired
     }
 
     handleChange = (event) => {
         const book = this.props.book;
         const status = event.target.value;
-        this.props.changeBookStatus(book, status);
+        this.props.changeBookStatus(book, status, true);
     }
-    
+
     render() {
         const { book } = this.props;
         const rating = _.range(5);

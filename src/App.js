@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import * as API from './BooksAPI'
 import Search from './Search';
 import Shelf from './Shelf';
 import './App.css';
@@ -12,12 +13,28 @@ class BooksApp extends React.Component {
     read: []
   }
 
-   /**
-    * @description Changes the shelf a book is on
-    * @param {object} book - The book being changed
-    * @param {string} status - The shelf
-    */
-  changeBookStatus = (book, status) => {
+  componentDidMount() {
+    API.getAll().then((books) => {
+      console.log(books);
+      if (books) {
+        books.map((b, i) => {
+          this.changeBookStatus(b, b.shelf);
+        })
+      }
+    })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
+  /**
+   * @description Changes the shelf a book is on
+   * @param {object} book - The book being changed
+   * @param {string} status - The shelf
+   * @param {boolean} update - A flag that indicates if the book needs an update
+   */
+  changeBookStatus = (book, status, update = false) => {
     let reading = this.state.reading.filter((b) => b.id !== book.id);
     let wantToRead = this.state.wantToRead.filter((b) => b.id !== book.id);
     let read = this.state.read.filter((b) => b.id !== book.id);
@@ -33,20 +50,28 @@ class BooksApp extends React.Component {
     this.setState({ reading: reading });
     this.setState({ wantToRead: wantToRead });
     this.setState({ read: read });
+    if (update) {
+      API.update(book, status)
+        .then((data) => {
+        })
+        .catch((error) => { 
+          console.log(error);         
+        });
+    }
   }
 
-   /**
-    * @description Verifies the shelf a book is currently on
-    * @param {object} book - The book being verified    
-    */
+  /**
+   * @description Verifies the shelf a book is currently on
+   * @param {object} book - The book being verified    
+   */
   selectedValue = (book) => {
-    const { reading, wantToRead, read } = this.state;    
+    const { reading, wantToRead, read } = this.state;
     if (reading.find(q => q.id === book.id))
       return 'currentlyReading';
     if (wantToRead.find(q => q.id === book.id))
       return 'wantToRead';
     if (read.find(q => q.id === book.id))
-      return 'read';    
+      return 'read';
     return 'none';
   }
 

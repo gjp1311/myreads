@@ -36,6 +36,7 @@ class Search extends React.Component {
                         books.map(b => {
                             return b.status = this.props.selectedValue(b);
                         });                        
+                        console.log(books);
                         this.setState({
                             books: books
                         });
