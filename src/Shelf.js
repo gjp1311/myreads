@@ -11,12 +11,11 @@ class Shelf extends React.Component {
         reading: PropTypes.array.isRequired,
         wantToRead: PropTypes.array.isRequired,
         read: PropTypes.array.isRequired,
-        changeBookStatus: PropTypes.func.isRequired,
-        selectedValue: PropTypes.func.isRequired
+        changeBookStatus: PropTypes.func.isRequired        
     };
 
     render() {
-        const { reading, wantToRead, read, changeBookStatus,selectedValue } = this.props;
+        const { reading, wantToRead, read, changeBookStatus } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -26,15 +25,15 @@ class Shelf extends React.Component {
                     <div>
                         <div className="bookshelf">
                             <h2 className="bookshelf-title">Currently Reading</h2>
-                            <BookShelf books={reading} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
+                            <BookShelf books={reading} changeBookStatus={changeBookStatus} />
                         </div>
                         <div className="bookshelf">
                             <h2 className="bookshelf-title">Want to Read</h2>
-                            <BookShelf books={wantToRead} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
+                            <BookShelf books={wantToRead} changeBookStatus={changeBookStatus} />
                         </div>
                         <div className="bookshelf">
                             <h2 className="bookshelf-title">Read</h2>
-                            <BookShelf books={read} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
+                            <BookShelf books={read} changeBookStatus={changeBookStatus} />
                         </div>
                     </div>
                 </div>

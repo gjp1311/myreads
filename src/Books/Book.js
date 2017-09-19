@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
+/**
+* @description Represents a Book.
+*/
 class Book extends React.Component {
 
     static propTypes = {
         book: PropTypes.object.isRequired,
-        changeBookStatus: PropTypes.func.isRequired,
-        selectedValue: PropTypes.func.isRequired
+        changeBookStatus: PropTypes.func.isRequired    
     }
 
     handleChange = (event) => {
@@ -15,20 +17,14 @@ class Book extends React.Component {
         const status = event.target.value;
         this.props.changeBookStatus(book, status);
     }
-
-    selectedValue = () => {
-        const book = this.props.book;
-        console.log('teste');
-        return this.props.selectedValue(book);
-    }
-
+    
     render() {
         const { book } = this.props;
         const rating = _.range(5);
         return (
             <div className="book">
                 <div className="book-top">
-                    <a className="book-cover"  href={book.previewLink && book.previewLink} target="_new"
+                    <a className="book-cover" href={book.previewLink && book.previewLink} target="_new"
                         style={{
                             width: 128, height: 193,
                             backgroundImage: `url(${book.imageLinks.thumbnail}`
@@ -53,7 +49,8 @@ class Book extends React.Component {
                     {book.authors &&
                         book.authors.join(', ')}
                 </div>
-                <div className="book-rating" title="Rating">
+                <div className="book-rating" title={(book.averageRating &&
+                    book.averageRating) || 0}>
                     {
                         rating.map((q, i) => {
                             if (book.averageRating >= i + 1)

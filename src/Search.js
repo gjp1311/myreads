@@ -23,7 +23,7 @@ class Search extends React.Component {
     };
 
     /**
-    * @description Handle the search input and creates a request to get the books with the query passed
+    * @description Handles the search input and creates a request to get the books with the query passed
     * @param {object} event - the Change event triggered by the search input    
     */
     handleChange = (event) => {
@@ -35,8 +35,7 @@ class Search extends React.Component {
                         const books = Array.isArray(data) ? data : [];
                         books.map(b => {
                             return b.status = this.props.selectedValue(b);
-                        });
-                        console.log(books);
+                        });                        
                         this.setState({
                             books: books
                         });
@@ -61,7 +60,6 @@ class Search extends React.Component {
             });
         }
     }
-
 
     render() {
         const { changeBookStatus, selectedValue } = this.props;

@@ -4,10 +4,6 @@ import Search from './Search';
 import Shelf from './Shelf';
 import './App.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
-// import '../node_modules/jquery/dist/jquery.min.js';  
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css'; 
-// import '../node_modules/bootstrap/dist/js/bootstrap.min.js'; 
-
 
 class BooksApp extends React.Component {
   state = {
@@ -16,6 +12,11 @@ class BooksApp extends React.Component {
     read: []
   }
 
+   /**
+    * @description Changes the shelf a book is on
+    * @param {object} book - The book being changed
+    * @param {string} status - The shelf
+    */
   changeBookStatus = (book, status) => {
     let reading = this.state.reading.filter((b) => b.id !== book.id);
     let wantToRead = this.state.wantToRead.filter((b) => b.id !== book.id);
@@ -34,6 +35,10 @@ class BooksApp extends React.Component {
     this.setState({ read: read });
   }
 
+   /**
+    * @description Verifies the shelf a book is currently on
+    * @param {object} book - The book being verified    
+    */
   selectedValue = (book) => {
     const { reading, wantToRead, read } = this.state;    
     if (reading.find(q => q.id === book.id))
@@ -49,7 +54,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path='/' render={() => (
-          <Shelf {...this.state} changeBookStatus={this.changeBookStatus} selectedValue={this.selectedValue} />
+          <Shelf {...this.state} changeBookStatus={this.changeBookStatus} />
         )} />
 
         <Route exact path='/search' render={() => (
