@@ -20,7 +20,9 @@ class Search extends React.Component {
 
     state = {
         lastRequest: {},
-        books: []
+        books: [],
+        loadingClass: 'done',
+        loadingBackground: ''
     };
 
     /**
@@ -28,8 +30,28 @@ class Search extends React.Component {
     * @param {object} event - the Change event triggered by the search input    
     */
     handleChange = (event) => {
-        console.log("foi");
         const query = event.target.value;
+        this.setState({
+            books: []
+        });
+        const d = document.getElementsByTagName("BODY")[0];
+        if (query !== '') {
+            this.setState({
+                loadingClass: 'currently-loading'
+            });
+            this.setState({
+                loadingBackground: 'background-loading'
+            });
+            d.className = "background-loading";
+        } else {
+            this.setState({
+                loadingClass: ''
+            });
+            this.setState({
+                loadingBackground: ''
+            });
+        }
+
         if (query.length > 0) {
             const request = API.search(query, 20)
                 .then((data) => {
@@ -42,6 +64,13 @@ class Search extends React.Component {
                         this.setState({
                             books: books
                         });
+                        this.setState({
+                            loadingClass: ''
+                        });
+                        this.setState({
+                            loadingBackground: ''
+                        });
+                        d.className = "";
                     }
                 })
                 .catch((error) => {
@@ -77,8 +106,10 @@ class Search extends React.Component {
                         </Debounce>
                     </div>
                 </div>
-                <div className="search-books-results">
+                <div className={`search-books-results ${this.state.loadingBackground}`}>
                     <BookShelf books={books} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
+                    <br /><br /><br /><br />
+                    <div id="overlay" className={this.state.loadingClass}></div>
                 </div>
             </div>
         );

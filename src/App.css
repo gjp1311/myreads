@@ -90,7 +90,7 @@ body, .app {
   top: 20px;
   left: 15px;
   width: 50px;
-  height: 53px;
+  height: 56px;
   background: white;
   background-image: url('./icons/arrow-back.svg');
   background-position: center;
@@ -171,4 +171,19 @@ body, .app {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+/* loading */
+.background-loading{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.currently-loading {     
+  margin: 0 auto;      
+  width: 100px;
+  height: 100px;  
+  background-image: url('./icons/loading.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100px;    
 }
