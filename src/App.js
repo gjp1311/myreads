@@ -14,11 +14,10 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    API.getAll().then((books) => {
-      console.log(books);
+    API.getAll().then((books) => {      
       if (books) {
         books.map((b, i) => {
-          this.changeBookStatus(b, b.shelf);
+          return this.changeBookStatus(b, b.shelf);
         })
       }
     })
@@ -26,7 +25,6 @@ class BooksApp extends React.Component {
         console.log(error);
       });
   }
-
 
   /**
    * @description Changes the shelf a book is on

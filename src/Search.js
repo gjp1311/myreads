@@ -59,8 +59,7 @@ class Search extends React.Component {
                         const books = Array.isArray(data) ? data : [];
                         books.map(b => {
                             return b.status = this.props.selectedValue(b);
-                        });
-                        console.log(books);
+                        });                        
                         this.setState({
                             books: books
                         });
