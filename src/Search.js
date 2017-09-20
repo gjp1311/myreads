@@ -14,7 +14,7 @@ class Search extends React.Component {
         reading: PropTypes.array.isRequired,
         wantToRead: PropTypes.array.isRequired,
         read: PropTypes.array.isRequired,
-        changeBookStatus: PropTypes.func.isRequired,
+        onChangeBookStatus: PropTypes.func.isRequired,
         selectedValue: PropTypes.func.isRequired
     };
 
@@ -93,7 +93,7 @@ class Search extends React.Component {
     }
 
     render() {
-        const { changeBookStatus, selectedValue } = this.props;
+        const { onChangeBookStatus, selectedValue } = this.props;
         const { books } = this.state;
         return (
             <div className="search-books">
@@ -106,7 +106,7 @@ class Search extends React.Component {
                     </div>
                 </div>
                 <div className={`search-books-results ${this.state.loadingBackground}`}>
-                    <BookShelf books={books} changeBookStatus={changeBookStatus} selectedValue={selectedValue} />
+                    <BookShelf books={books} onChangeBookStatus={onChangeBookStatus} selectedValue={selectedValue} />
                     <br /><br /><br /><br />
                     <div id="overlay" className={this.state.loadingClass}></div>
                 </div>

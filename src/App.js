@@ -17,7 +17,7 @@ class BooksApp extends React.Component {
     API.getAll().then((books) => {      
       if (books) {
         books.map((b, i) => {
-          return this.changeBookStatus(b, b.shelf);
+          return this.onChangeBookStatus(b, b.shelf);
         })
       }
     })
@@ -32,7 +32,7 @@ class BooksApp extends React.Component {
    * @param {string} status - The shelf
    * @param {boolean} update - A flag that indicates if the book needs an update
    */
-  changeBookStatus = (book, status, update = false) => {
+  onChangeBookStatus = (book, status, update = false) => {
     let reading = this.state.reading.filter((b) => b.id !== book.id);
     let wantToRead = this.state.wantToRead.filter((b) => b.id !== book.id);
     let read = this.state.read.filter((b) => b.id !== book.id);
@@ -77,11 +77,11 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path='/' render={() => (
-          <Shelf {...this.state} changeBookStatus={this.changeBookStatus} />
+          <Shelf {...this.state} onChangeBookStatus={this.onChangeBookStatus} />
         )} />
 
         <Route exact path='/search' render={() => (
-          <Search {...this.state} changeBookStatus={this.changeBookStatus} selectedValue={this.selectedValue} />
+          <Search {...this.state} onChangeBookStatus={this.onChangeBookStatus} selectedValue={this.selectedValue} />
         )} />
       </div>
     )

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 * @description Represents a Bookshelf. Contains Books
 */
 const Shelf = (props) => {
-    const { reading, wantToRead, read, changeBookStatus } = props;
+    const { reading, wantToRead, read, onChangeBookStatus } = props;
     return (
         <div className="list-books">
             <div className="list-books-title">
@@ -17,15 +17,15 @@ const Shelf = (props) => {
                 <div>
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Currently Reading</h2>
-                        <BookShelf books={reading} changeBookStatus={changeBookStatus} />
+                        <BookShelf books={reading} onChangeBookStatus={onChangeBookStatus} />
                     </div>
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Want to Read</h2>
-                        <BookShelf books={wantToRead} changeBookStatus={changeBookStatus} />
+                        <BookShelf books={wantToRead} onChangeBookStatus={onChangeBookStatus} />
                     </div>
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Read</h2>
-                        <BookShelf books={read} changeBookStatus={changeBookStatus} />
+                        <BookShelf books={read} onChangeBookStatus={onChangeBookStatus} />
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@ Shelf.propTypes = {
     reading: PropTypes.array.isRequired,
     wantToRead: PropTypes.array.isRequired,
     read: PropTypes.array.isRequired,
-    changeBookStatus: PropTypes.func.isRequired
+    onChangeBookStatus: PropTypes.func.isRequired
 };
 
 export default Shelf;

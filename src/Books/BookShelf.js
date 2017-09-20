@@ -8,18 +8,18 @@ import Book from './Book';
 class BookShelf extends React.Component {    
     static propTypes = {
         books: PropTypes.array.isRequired,
-        changeBookStatus: PropTypes.func.isRequired        
+        onChangeBookStatus: PropTypes.func.isRequired        
     };
 
     render() {
-        const { books, changeBookStatus } = this.props;
+        const { books, onChangeBookStatus } = this.props;
         return (
             <div className="bookshelf-books">
                 <ol className="books-grid">
                     {books.map(((b, i) => {
                         return (
                             <li key={i}>
-                                <Book book={b} changeBookStatus={changeBookStatus} />
+                                <Book book={b} onChangeBookStatus={onChangeBookStatus} />
                             </li>
                         );
                     })

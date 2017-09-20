@@ -9,13 +9,13 @@ class Book extends React.Component {
 
     static propTypes = {
         book: PropTypes.object.isRequired,
-        changeBookStatus: PropTypes.func.isRequired
+        onChangeBookStatus: PropTypes.func.isRequired
     }
 
     handleChange = (event) => {
         const book = this.props.book;
         const status = event.target.value;
-        this.props.changeBookStatus(book, status, true);
+        this.props.onChangeBookStatus(book, status, true);
     }
 
     render() {
