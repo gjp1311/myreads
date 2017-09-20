@@ -3,6 +3,7 @@ import * as API from './BooksAPI'
 import { Link } from 'react-router-dom';
 import BookShelf from './Books/BookShelf';
 import PropTypes from 'prop-types';
+import { Debounce } from 'react-throttle';
 
 /**
 * @description Represents the Search Form
@@ -27,6 +28,7 @@ class Search extends React.Component {
     * @param {object} event - the Change event triggered by the search input    
     */
     handleChange = (event) => {
+        console.log("foi");
         const query = event.target.value;
         if (query.length > 0) {
             const request = API.search(query, 20)
@@ -35,7 +37,7 @@ class Search extends React.Component {
                         const books = Array.isArray(data) ? data : [];
                         books.map(b => {
                             return b.status = this.props.selectedValue(b);
-                        });                        
+                        });
                         console.log(books);
                         this.setState({
                             books: books
@@ -70,7 +72,9 @@ class Search extends React.Component {
                 <div className="search-books-bar">
                     <Link to='/' className="close-search">Close</Link>
                     <div className="search-books-input-wrapper">
-                        <input type="text" placeholder="Search by title or author" onChange={this.handleChange} />
+                        <Debounce time="400" handler="onChange">
+                            <input type="text" placeholder="Search by title or author" onChange={this.handleChange} />
+                        </Debounce>
                     </div>
                 </div>
                 <div className="search-books-results">

@@ -27,7 +27,7 @@ class Book extends React.Component {
                     <a className="book-cover" href={book.previewLink && book.previewLink} target="_new"
                         style={{
                             width: 128, height: 193,
-                            backgroundImage: `url(${book.imageLinks.thumbnail}`
+                            backgroundImage: `url(${book.imageLinks && book.imageLinks.thumbnail}`
                         }}>
                     </a>
                     <div className="book-shelf-changer">
